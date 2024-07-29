@@ -60,6 +60,13 @@ func TestSelect(t *testing.T) {
 			},
 
 			{
+				"select with overlap condition for range types",
+				dbz.Select("*").From("table").Where(Overlap("array_col", []string{"1", "2", "3"})),
+				"SELECT * FROM table WHERE array_col && ?",
+				[]interface{}{"1", "2", "'{1,2,3}'"},
+			},
+
+			{
 				"select with IN condition",
 				dbz.Select("*").From("table").Where(In("id", 1, 2, 3, 4)),
 				"SELECT * FROM table WHERE id IN (?, ?, ?, ?)",

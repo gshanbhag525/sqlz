@@ -193,6 +193,9 @@ func Not(cond WhereCondition) PreCondition {
 	return PreCondition{"NOT", cond}
 }
 
+// Overlap represents overlap between array types ("&&" operator)
+func Overlap(col string, value interface{}) SimpleCondition { return SimpleCondition{col, value, "&&"} }
+
 // Eq represents a simple equality condition ("=" operator)
 func Eq(col string, value interface{}) SimpleCondition {
 	return SimpleCondition{col, value, "="}
